@@ -7,7 +7,10 @@ import os
 data_transforms = {
     'train': transforms.Compose([
         transforms.Resize((224, 224)),
-        transforms.RandomHorizontalFlip(),
+        transforms.RandomHorizontalFlip(p=0.5),
+        transforms.RandomRotation(degrees=15),
+        transforms.RandomAffine(degrees=0, translate=(0.1, 0.1)),
+        transforms.ColorJitter(brightness=0.2, contrast=0.2),
         transforms.ToTensor(),
         transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])
     ]),
@@ -28,16 +31,20 @@ device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
 model = models.resnet18(pretrained=True)
 
+for param in model.parameters():
+    param.requires_grad = True
+
 num_ftrs = model.fc.in_features
 model.fc = nn.Linear(num_ftrs, 2)
 model = model.to(device)
 
 criterion = nn.CrossEntropyLoss()
-optimizer = optim.SGD(model.parameters(), lr=0.001, momentum=0.9)
 
-print("Memulai Training AI...")
-for epoch in range(20):
-    print(f'Epoch {epoch+1}/20')
+optimizer = optim.SGD(model.parameters(), lr=0.0001, momentum=0.9)
+
+print("Memulai Training AI Berbasis Fine-Tuning & Augmentasi...")
+for epoch in range(25):
+    print(f'Epoch {epoch+1}/25')
     print('-' * 10)
 
     for phase in ['train', 'val']:
@@ -75,4 +82,4 @@ for epoch in range(20):
 print('Training Selesai!')
 
 torch.save(model.state_dict(), 'model_monyet_kera.pth')
-print("Model berhasil disimpan")
+print("Model baru berhasil disimpan")
