@@ -1,4 +1,4 @@
-# 🐒🦍 Monkey vs Ape Classifier Web App
+# Monkey vs Ape Classifier Web App
 
 A full-stack Deep Learning web application that classifies primate images into either **Monkey (Monyet)** or **Ape (Kera)**. This project utilizes **PyTorch** for the computer vision backbone and **Flask** for the minimalist web interface.
 
@@ -14,8 +14,6 @@ Distinguishing between monkeys and apes can be visually challenging due to overl
 Unlike models trained completely from scratch, this project implements **Transfer Learning**. We leverage **ResNet18**, a deep convolutional neural network pre-trained on the massive ImageNet dataset, and fine-tune its final layers for our specific task.
 
 The image processing flow follows a structured Deep Learning pipeline:
-
----
 
 ### 1. Feature Extraction (Convolutional Layers)
 * **Convolution & Pooling:** The pre-trained layers filter low-level features (edges, textures) and high-level abstract shapes (facial structures, limb proportions) from the primate images.
