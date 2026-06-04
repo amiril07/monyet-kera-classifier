@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hasil Analisis - AI Detector</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans min-h-screen flex items-center justify-center p-4">
+
+    <div class="max-w-md w-full bg-white rounded-2xl shadow-xl p-8 border border-slate-100 transition-all">
+        <div class="text-center mb-6">
+            <span class="bg-emerald-100 text-emerald-700 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">
+                Analisis Selesai
+            </span>
+            <h1 class="text-2xl font-bold mt-4 text-slate-800">Hasil Identifikasi</h1>
+        </div>
+
+        <div class="relative w-full h-64 rounded-xl overflow-hidden shadow-inner bg-slate-100 mb-6">
+            <img src="data:image/jpeg;base64,{{ user_image }}" class="w-full h-full object-cover">
+        </div>
+
+        <div class="bg-slate-50 rounded-xl p-6 border border-slate-100 text-center mb-6">
+            <p class="text-slate-500 text-sm uppercase font-semibold tracking-widest mb-1">Spesies Terdeteksi</p>
+            <h2 class="text-4xl font-black text-emerald-600 mb-4">{{ prediction }}</h2>
+            
+            <div class="w-full bg-slate-200 rounded-full h-2.5 mb-2">
+                <div class="bg-emerald-500 h-2.5 rounded-full" style="width: {{ confidence }}%"></div>
+            </div>
+            <p class="text-xs text-slate-400">Tingkat Keyakinan AI: <span class="font-bold text-slate-600">{{ confidence }}%</span></p>
+        </div>
+
+        <a href="/" class="w-full bg-slate-800 text-white font-medium py-3 px-4 rounded-xl shadow-md hover:bg-slate-900 transition-all flex items-center justify-center gap-2">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+            </svg>
+            Coba Gambar Lain
+        </a>
+
+        <p class="text-center text-[10px] text-slate-400 mt-6 uppercase tracking-widest">AI Classification</p>
+    </div>
+
+</body>
+</html>
