@@ -15,6 +15,7 @@ Unlike models trained completely from scratch, this project implements **Transfe
 
 The image processing flow follows a structured Deep Learning pipeline:
 
+---
 
 ### 1. Feature Extraction (Convolutional Layers)
 * **Convolution & Pooling:** The pre-trained layers filter low-level features (edges, textures) and high-level abstract shapes (facial structures, limb proportions) from the primate images.
@@ -34,7 +35,7 @@ The image processing flow follows a structured Deep Learning pipeline:
 ## 🛠️ Tech Stack & Dependencies
 * **Core AI Framework:** PyTorch (`torch`, `torchvision`)
 * **Web Framework:** Flask (Python backend)
-* **Frontend:** HTML5, JavaScript (Live Preview Feature), Tailwind CSS (Minimalist green theme)
+* **Frontend:** HTML5, JavaScript, Tailwind CSS
 * **Image Processing:** Pillow (PIL)
 
 ---
