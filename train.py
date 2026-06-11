@@ -3,6 +3,7 @@ import torch.nn as nn
 import torch.optim as optim
 from torchvision import datasets, transforms, models
 import os
+import numpy as np
 
 data_transforms = {
     'train': transforms.Compose([
@@ -28,8 +29,9 @@ dataset_sizes = {x: len(image_datasets[x]) for x in ['train', 'val']}
 class_names = image_datasets['train'].classes
 
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+print(f"Menggunakan device: {device}")
 
-model = models.resnet18(pretrained=True)
+model = models.resnet34(pretrained=True)
 
 for param in model.parameters():
     param.requires_grad = True
@@ -39,12 +41,18 @@ model.fc = nn.Linear(num_ftrs, 2)
 model = model.to(device)
 
 criterion = nn.CrossEntropyLoss()
-
 optimizer = optim.SGD(model.parameters(), lr=0.0001, momentum=0.9)
 
+history = {
+    'train_loss': [], 'val_loss': [],
+    'train_acc': [], 'val_acc': []
+}
+
 print("Memulai Training AI Berbasis Fine-Tuning & Augmentasi...")
-for epoch in range(25):
-    print(f'Epoch {epoch+1}/25')
+num_epochs = 15
+
+for epoch in range(num_epochs):
+    print(f'Epoch {epoch+1}/{num_epochs}')
     print('-' * 10)
 
     for phase in ['train', 'val']:
@@ -78,8 +86,18 @@ for epoch in range(25):
         epoch_acc = running_corrects.double() / dataset_sizes[phase]
 
         print(f'{phase} Loss: {epoch_loss:.4f} Acc: {epoch_acc:.4f}')
+        
+        if phase == 'train':
+            history['train_loss'].append(epoch_loss)
+            history['train_acc'].append(epoch_acc.item())
+        else:
+            history['val_loss'].append(epoch_loss)
+            history['val_acc'].append(epoch_acc.item())
 
 print('Training Selesai!')
 
+np.save('training_history.npy', history)
+print("Data history berhasil diekspor ke 'training_history.npy'.")
+
 torch.save(model.state_dict(), 'model_monyet_kera.pth')
-print("Model baru berhasil disimpan")
+print("Model baru berhasil disimpan dengan nama 'model_monyet_kera.pth'.")

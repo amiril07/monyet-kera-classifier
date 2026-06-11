@@ -9,7 +9,7 @@ import base64
 app = Flask(__name__)
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-model = models.resnet18()
+model = models.resnet34()
 num_ftrs = model.fc.in_features
 model.fc = nn.Linear(num_ftrs, 2)
 
