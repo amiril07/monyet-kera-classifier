@@ -8,7 +8,7 @@ from pytorch_grad_cam.utils.image import show_cam_on_image
 from PIL import Image
 
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
-model = models.resnet18()
+model = models.resnet34()
 num_ftrs = model.fc.in_features
 model.fc = nn.Linear(num_ftrs, 2)
 model.load_state_dict(torch.load('model_monyet_kera.pth', map_location=device))
