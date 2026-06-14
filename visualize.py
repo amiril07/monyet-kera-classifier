@@ -16,7 +16,7 @@ model.eval()
 
 target_layers = [model.layer4[-1]]
 
-image_path = 'dataset/val/monyet/vm1.png'
+image_path = 'dataset/val/monyet/vm9.png'
 rgb_img = cv2.imread(image_path)[:, :, ::-1]
 rgb_img = np.float32(rgb_img) / 255
 transform = transforms.Compose([

@@ -49,7 +49,7 @@ history = {
 }
 
 print("Memulai Training AI Berbasis Fine-Tuning & Augmentasi...")
-num_epochs = 15
+num_epochs = 20
 
 for epoch in range(num_epochs):
     print(f'Epoch {epoch+1}/{num_epochs}')
